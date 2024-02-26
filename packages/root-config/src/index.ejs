@@ -44,20 +44,30 @@
   <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
 
   <% if (isLocal) { %>
-  <script type="systemjs-importmap">
-    {
-      "imports": {
-        "@ventas/root-config": "//localhost:9000/ventas-root-config.js",
-        "@ventas/clientes": "//localhost:4200/main.js",
-        "@ventas/facturar": "//localhost:4201/main.js",
-        "@ventas/menu": "//localhost:4202/main.js",
-        "@ventas/productos": "//localhost:4203/main.js"
-        
-      }
-    }
-  </script>
-  <% } %>
 
+    <script id ="dev-import-map-overrides">
+    var script = document.createElement('script');
+    script.setAttribute('type','systemjs-importmap');
+    
+    const featureAppData = JSON.parse('<%= FEATURE_APP_DATA %>');  
+    
+    const overrides= {
+      "@ventas/root-config": "//localhost:9000/ventas-root-config.js",
+      "@ventas/styleguide":"//localhost:9001/main.js"
+    };
+    
+    Object.entries(featureAppData).forEach(([appName, portNumber])=>{
+      overrides[`@ventas/${appName}`]= `http://localhost:${portNumber}/main.js`;
+    })
+    script.innerHTML= JSON.stringify({
+      imports: overrides
+    })
+    
+    document.querySelector('#dev-import-map-overrides').after(script);
+    </script>
+    
+      
+      <% } %>
   <!--
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
     Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
@@ -80,6 +90,7 @@
   </noscript>
   <script>
     System.import('@ventas/root-config');
+    System.import('@ventas/styleguide');
   </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>

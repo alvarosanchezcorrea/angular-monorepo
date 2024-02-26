@@ -2,8 +2,8 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "start": "lerna run start --parallel --stream"
-    
+    "start": "node ./scripts/start.js",
+    "start:all": "lerna run start --parallel --stream"
   },
   "workspaces": [
     "packages/*"

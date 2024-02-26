@@ -1,2 +1,3 @@
-// Anything exported from this file is importable by other in-browser modules.
+import "./styless.scss?ngGlobalStyle";
+
 export function publicApiFunction() {}

@@ -29,7 +29,7 @@ const lifecycles = singleSpaAngular({
     };
     return bootstrapApplication(AppComponent, options);
   },
-  template: '<app-root />',
+  template: '<app-menu />',
   Router,
   NavigationStart,
   NgZone,

@@ -1,5 +1,5 @@
-const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa-ts");
+const debug = require("debug")("styleguide");
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
@@ -9,7 +9,40 @@ module.exports = (webpackConfigEnv, argv) => {
     argv,
   });
 
-  return merge(defaultConfig, {
-    // modify the webpack config however you'd like to by adding to this object
-  });
+ const final = {
+   ...defaultConfig,
+   devServer: {
+     ...defaultConfig.devServer,
+     port: 9001,
+     https: Boolean(process.env.HTTPS),
+   },
+   output: {
+     ...defaultConfig.output,
+     filename: "main.js",
+   },
+   module:{
+     ...defaultConfig.module,
+     rules: [
+       ...defaultConfig.module.rules,
+       {
+         test: /\.s[ac]ss$/i,
+         use: ["style-loader", "css-loader", "sass-loader"],
+       },
+       {
+         test: /\.(ts|js)x?$/,
+         exclude: /node_modules/,
+         loader: "babel-loader",
+         options: {
+           presets: [
+             "@babel/preset-env",
+             "@babel/preset-typescript"
+           ],
+         },
+       },
+     ]
+   },
+   stats: "errors-warnings",
+ }
+ debug(final);
+ return final;  
 };
