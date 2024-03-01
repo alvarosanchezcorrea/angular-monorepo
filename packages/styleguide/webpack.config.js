@@ -6,7 +6,7 @@ module.exports = (webpackConfigEnv, argv) => {
     orgName: "ventas",
     projectName: "styleguide",
     webpackConfigEnv,
-    argv,
+    argv, 
   });
 
  const final = {

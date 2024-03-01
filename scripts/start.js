@@ -2,6 +2,7 @@
 const prompts = require('prompts');
 prompts.override(require('yargs').argv);
 const {spawn} = require('node:child_process')
+const pidTree = require("pidtree");
 
 const apps = {
 clientes:4200,
@@ -39,7 +40,7 @@ productos:4203
  "run",
   "start",
   "--scope",
-  `*/*{root-config,styleguide,${appSeleccionadas.join(",")}}*`,
+  `*/*{root-config,utils,layout,styleguide,${appSeleccionadas.join(",")}}*`,
   "--stream",
   "--parallel",
 ],
@@ -55,4 +56,11 @@ productos:4203
  );
  
   
+
+setTimeout(async () => {
+  const ids = await pidTree(iniciarProceso.pid);
+  process.on("SIGINT", async () => {
+    spawn("kill", ["-9"].concat(ids));
+  });
+}, 2000);
 })();

@@ -1,6 +1,5 @@
 import { enableProdMode, NgZone } from '@angular/core';
 
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Router, NavigationStart, provideRouter } from '@angular/router';
 
 import { singleSpaAngular, getSingleSpaExtraProviders } from 'single-spa-angular';

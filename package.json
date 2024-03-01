@@ -8,8 +8,10 @@
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {},
   "devDependencies": {
     "lerna": "^8.0.2"
+  },
+  "dependencies": {
+    "pidtree": "^0.6.0"
   }
 }

@@ -1,3 +1,9 @@
 import "./styless.scss?ngGlobalStyle";
 
-export function publicApiFunction() {}
+export function publicApiFunction() {
+    return (
+        "publicApiFunction"
+    )
+}
+
+

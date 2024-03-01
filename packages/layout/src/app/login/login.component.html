@@ -1,0 +1,24 @@
+
+
+<h1 class="text-3xl font-bold underline">
+ Sistema de ventas
+</h1>
+<p-card header="Iniciar sesión">
+    <div class="card flex justify-content-cente" >
+      <div class="input-container">
+        <input type="email" pInputText [(ngModel)]="email" placeholder="Correo electrónico" />
+      </div>
+    </div>
+    <div class="card flex justify-content-center">
+      <div class="input-container">
+        <input type="password" pInputText [(ngModel)]="password" placeholder="Contraseña" />
+      </div>
+    </div>
+    <div class="card flex justify-content-center">
+      <div class="input-container">
+        <button pButton type="button" (click)="login()" label="Iniciar sesión"></button>
+        <p-messages></p-messages>
+      </div>
+    </div>
+  </p-card>
+  
