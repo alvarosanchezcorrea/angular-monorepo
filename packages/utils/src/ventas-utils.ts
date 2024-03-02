@@ -1,4 +1,7 @@
 import { initializeApp } from "firebase/app";
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -15,6 +18,8 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
+
+const db = getFirestore(firebaseApp);
 
 export const loginFirebase = (
   email: string,
@@ -43,3 +48,34 @@ export const isAuthenticated = (): boolean => {
 };
 
 export { getAuth, signInWithEmailAndPassword, firebaseApp };
+
+export const addClientes = async (data: any) => {
+  try {
+    const docRef = await addDoc(collection(db, "clientes"), data);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
+
+export const addProductos = async (data: any) => {
+  try {
+    const docRef = await addDoc(collection(db, "productos"), data);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
+
+export const getMenu = () => {
+  return new Promise(async (resolve, eject) => {
+    const querySnapshot = await getDocs(collection(db, "menu"));
+
+    const arrayMenu = querySnapshot.docs.map((doc) => {
+      let data = doc.data();
+
+     
+      return { ...data };
+    });
+
+    resolve(arrayMenu);
+  });
+};

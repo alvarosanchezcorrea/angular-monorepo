@@ -38,7 +38,7 @@
               "libraryName": "layout",
               "libraryTarget": "umd"
             },
-            "deployUrl": "http://localhost:4204/"
+            "deployUrl": "http://localhost:4205/"
           },
           "configurations": {
             "production": {

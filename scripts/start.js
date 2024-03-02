@@ -8,7 +8,8 @@ const apps = {
 clientes:4200,
 facturar:4201,
 menu:4202,
-productos:4203
+productos:4203,
+reportes:4204
 };
 
 (async () => {

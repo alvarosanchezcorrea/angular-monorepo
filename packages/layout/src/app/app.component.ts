@@ -5,7 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { CommonModule } from '@angular/common';
 import { MessageService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
-import { isAuthenticated } from '@ventas/utils';
+import { isAuthenticated, addClientes, getMenu } from '@ventas/utils';
 @Component({
   selector: 'app-layout',
   standalone: true,
@@ -33,8 +33,10 @@ export class AppComponent implements OnInit {
 
   title = 'layout';
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if (isAuthenticated()) {
+     
+
       this.userAutenticado = true;
     } else {
       this.userAutenticado = false;
